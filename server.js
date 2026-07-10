@@ -1,5 +1,6 @@
 import { getAllOrganizations } from './src/models/organizations.js';
-import express from "express";
+import { getAllProjects } from './src/models/project.js';
+import  express from "express";
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
@@ -46,13 +47,17 @@ app.get('/organizations', async (req, res) => {
 });
 
 app.get('/projects', async (req, res) => {
-    const title = 'Service Projects';
-    res.render('projects', { title });
+    const projects = await getAllProjects();
+    const title = 'Our Service Projects';
+
+    res.render('projects', { title, projects });
 });
 
 app.get('/categories', async (req, res) => {
     const title = 'Categories';
     res.render('categories', { title });
 });
+
+console.log(await getAllProjects());
 
 

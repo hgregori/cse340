@@ -1,15 +1,19 @@
-
 <%- include('partials/header') %>
+
 <main>
     <h1><%= title %></h1>
 
-        <h2>Coming Soon!</h2>
-        <h2>Upcoming Service Projects</h2>
-        <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
-        </ul>
-  
+    <h2>Service Projects</h2>
+
+    <ul>
+        <% projects.forEach(project => { %>
+            <li>
+                <%= new Date(project.start_date).toLocaleDateString() %>:
+                <strong><%= project.project_name %></strong>
+                (<%= project.organization_name %>)
+            </li>
+        <% }); %>
+    </ul>
 </main>
+
 <%- include('partials/footer') %>
