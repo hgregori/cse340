@@ -1,15 +1,17 @@
-
 <%- include('partials/header') %>
+
 <main>
     <h1><%= title %></h1>
 
-        <h2>Welcome to our service reaserch page!</h2>
-        <p>You can find our organizations and projects here!</p>
-        <ul>
-            <li>Environmental</li>
-            <li>Educational</li>
-            <li>Community Service</li>
-            <li>Health and Wellness</li>
-        </ul>
+    <h2>Welcome to our service research page!</h2>
+    <p>You can find our service project categories below:</p>
+
+    <ul>
+        <% categories.forEach(category => { %>
+            <li><%= category.category_name %></li>
+        <% }) %>
+    </ul>
+
 </main>
+
 <%- include('partials/footer') %>
