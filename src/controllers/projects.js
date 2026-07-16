@@ -10,8 +10,8 @@ const showProjectsPage = async (req, res) => {
 };
 
 const showProjectDetailsPage = async (req, res) => {
-    const projectId = req.params.id;
-    const project = await getProjectDetails(projectId);
+    const Id = req.params.id;
+    const project = await getProjectDetails(Id);
     const title = 'Service Project Details';
 
     res.render('project', { title, project });

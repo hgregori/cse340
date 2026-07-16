@@ -10,9 +10,13 @@ import { testErrorPage } from './controllers/errors.js';
 const router = express.Router();
 
 router.get('/', showHomePage);
+
 router.get('/organizations', showOrganizationsPage);
+
 router.get('/projects', showProjectsPage);
-router.get('/project/:id', showProjectDetailsPage);
+
+router.get('/project/:id', showProjectDetailsPage); 
+
 router.get('/categories', showCategoriesPage);
 
 // error-handling routes

@@ -176,3 +176,18 @@ JOIN ProjectCategory pc
 JOIN Category c
     ON pc.category_id = c.category_id
 ORDER BY sp.project_name;
+
+UPDATE ServiceProject
+SET start_date = CASE project_id
+    WHEN 2 THEN DATE '2026-09-01'
+    WHEN 4 THEN DATE '2026-10-15'
+    WHEN 5 THEN DATE '2026-12-01'
+    WHEN 7 THEN DATE '2026-09-15'
+    WHEN 8 THEN DATE '2026-10-01'
+    WHEN 10 THEN DATE '2026-11-15'
+    WHEN 12 THEN DATE '2026-12-10'
+    WHEN 13 THEN DATE '2026-09-20'
+    WHEN 15 THEN DATE '2026-11-01'
+    ELSE start_date
+END
+WHERE project_id IN (2, 4, 5, 7, 8, 10, 12, 13, 15);w

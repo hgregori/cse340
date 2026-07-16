@@ -39,13 +39,13 @@ const getUpcomingProjects = async (numberOfProjects) => {
         ORDER BY sp.start_date ASC
         LIMIT $1;
     `;
-
+    
     const result = await db.query(query, [numberOfProjects]);
-
+    
     return result.rows;
 };
 
-const getProjectDetails = async (projectId) => {
+const getProjectDetails = async (Id) => {
     const query = `
         SELECT
             sp.project_id,
@@ -60,8 +60,8 @@ const getProjectDetails = async (projectId) => {
             ON sp.organization_id = o.organization_id
         WHERE sp.project_id = $1;
     `;
-
-    const result = await db.query(query, [projectId]);
+    
+    const result = await db.query(query, [Id]);
 
     return result.rows.length > 0 ? result.rows[0] : null;
 };
@@ -79,9 +79,9 @@ const getProjectsByOrganizationId = async (organizationId) => {
         WHERE sp.organization_id = $1
         ORDER BY sp.start_date;
     `;
-
+    
     const result = await db.query(query, [organizationId]);
-
+    
     return result.rows;
 };
 
