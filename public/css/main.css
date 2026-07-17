@@ -152,6 +152,20 @@ p {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
 }
 
+/* Organization detail logo */
+main > img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 1rem auto 1.5rem;
+    border-radius: 0.75rem;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
 /* Lists styling (used for categories, projects, and organizations) */
 main ul {
     list-style: none;
