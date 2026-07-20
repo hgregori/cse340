@@ -24,6 +24,8 @@
   "dependencies": {
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
     "jse": "^0.0.3",
     "nodemon": "^3.1.14",
     "pg": "^8.22.0",
