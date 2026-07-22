@@ -1,4 +1,4 @@
-import { getUpcomingProjects, getProjectDetails, createProject } from '../models/projects.js';
+import { getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
 import {getAllOrganizations} from '../models/organizations.js';
 
@@ -55,4 +55,37 @@ const processNewProjectForm = async (req, res) => {
     }
 }
 
-export { showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm};
+const showUpdateProjectForm = async (req, res) => {
+    const projectId = req.params.id;
+    const projectDetails = await getProjectDetails(projectId);
+    const organizations = await getAllOrganizations();
+    const categories = await getCategoriesByProjectId(projectId);
+    const title = 'Update Service Project';
+
+    const context = {
+        title,
+        project: projectDetails,
+        organizations,
+        categories
+    };
+    
+    res.render('update-project', context);
+};
+
+const processEditProjectForm = async (req, res) => {
+    const projectId = req.params.id;
+    const { title, description, location, date, organizationId } = req.body;
+
+    try {
+        await updateProject(projectId, title, description, location, date, organizationId);
+
+        req.flash('success', 'Service project updated successfully!');
+        res.redirect(`/project/${projectId}`);
+    } catch (error) {
+        console.error('Error updating project:', error);
+        req.flash('error', 'Failed to update service project.');
+        res.redirect(`/update-project/${projectId}`);
+    }
+}
+
+export { showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm, showUpdateProjectForm, processEditProjectForm };  

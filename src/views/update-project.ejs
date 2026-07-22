@@ -1,0 +1,69 @@
+<%- include('partials/header') %>
+<main>
+    <h1><%= title %></h1>
+
+ <form action="/update-project/<%= projectDetails.project_id %>" method="POST">
+    <div class="form-group">
+      <label for="title">Project Title</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value="<%= projectDetails.title %>"
+        maxlength="150"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        maxlength="500"
+        required
+      ><%= projectDetails.description %></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input
+        type="text"
+        id="location"
+        name="location"
+        maxlength="100"
+        required
+        value="<%= projectDetails.location %>"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input
+        type="date"
+        id="date"
+        name="date"
+        maxlength="255"
+        required
+        value="<%= projectDetails.date %>"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="logoFilename">Logo Filename</label>
+      <input
+        type="text"
+        id="logoFilename"
+        name="logoFilename"
+        maxlength="255"
+        required
+        value="<%= projectDetails.logo_filename %>"
+      />
+    </div>
+
+
+    <button type="submit">Update Organization</button>
+  </form>
+
+</main>
+<%- include('partials/footer') %>

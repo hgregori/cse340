@@ -11,7 +11,6 @@ const getAllOrganizations = async() => {
     return result.rows;
 }
 
-
 const getOrganizationDetails = async (organizationId) => {
       const query = `
       SELECT
