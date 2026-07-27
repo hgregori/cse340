@@ -37,3 +37,5 @@ const showCategoryDetailsPage = async (req, res, next) => {
 
 // Export any controller functions
 export { showCategoriesPage, showCategoryDetailsPage };
+
+// 
