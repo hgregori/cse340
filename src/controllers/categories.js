@@ -1,7 +1,7 @@
 // Import any needed model functions
 import { body, validationResult } from 'express-validator';
-import { getAllCategories, getCategoryById, createCategory, updateCategory, updateCategoryAssignments } from '../models/categories.js';
-import { getProjectDetails, getCategoriesByProjectId, getProjectsByCategoryId } from '../models/projects.js';
+import { getAllCategories, getCategoryById, createCategory, updateCategory, updateCategoryAssignments, getCategoriesByProjectId } from '../models/categories.js';
+import { getProjectDetails, getProjectsByCategoryId } from '../models/projects.js';
 
 const categoryValidation = [
     body('categoryName')
