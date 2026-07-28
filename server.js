@@ -4,6 +4,7 @@ import path from 'path';
 import { testConnection } from './src/models/db.js';
 import router from './src/routes.js';
 import session from 'express-session';
+import flash from 'connect-flash';
 
 
 // Define the application environment
