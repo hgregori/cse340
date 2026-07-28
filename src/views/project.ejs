@@ -12,7 +12,8 @@
     <% } else { %>
         <p>Service project not found.</p>
     <% } %>
-    <a href="/assign-categories/<%= project.project_id %>">Edit Categories</a>
+    <p><a href="/edit-project/<%= project.project_id %>">Update Project</a></p>
+    <p><a href="/assign-categories/<%= project.project_id %>">Edit Categories</a></p>
 </main>
 
 <%- include('partials/footer') %>
