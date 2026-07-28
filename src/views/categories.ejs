@@ -6,9 +6,14 @@
     <h2>Welcome to our service research page!</h2>
     <p>You can find our service project categories below:</p>
 
+    <p><a href="/new-category">Create a New Category</a></p>
+
     <ul>
         <% categories.forEach(category => { %>
-            <li><a href="/category/<%= category.category_id %>"><%= category.category_name %></a></li>
+            <li>
+                <a href="/category/<%= category.category_id %>"><%= category.category_name %></a>
+                <a href="/edit-category/<%= category.category_id %>">Edit</a>
+            </li>
         <% }) %>
     </ul>
 
