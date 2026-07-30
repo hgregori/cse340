@@ -107,14 +107,14 @@ const getProjectsByOrganizationId = async (organizationId) => {
         return result.rows;
 };
 
-const createProject = async (title, description, location, date, organizationId) => {
+const createProject = async (title, description, location, date, organizationId, status) => {
     const query = `
-      INSERT INTO "serviceproject" (project_name, project_description, location, start_date, organization_id)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO "serviceproject" (project_name, project_description, location, start_date, organization_id, status)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING project_id;
     `;
 
-    const queryParams = [title, description, location, date, organizationId];
+    const queryParams = [title, description, location, date, organizationId, status];
     const result = await db.query(query, queryParams);
 
     if (result.rows.length === 0) {
