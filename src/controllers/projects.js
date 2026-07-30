@@ -9,7 +9,7 @@ const projectValidation = [
     body('title')
         .trim()
         .notEmpty().withMessage('Title is required')
-        .isLength({ min: 3, max: 200 }).withMessage('Title must be between 3 and 200 characters'),
+        .isLength({ min: 3, max: 150 }).withMessage('Title must be between 3 and 150 characters'),
     body('description')
         .trim()
         .notEmpty().withMessage('Description is required')
@@ -17,13 +17,17 @@ const projectValidation = [
     body('location')
         .trim()
         .notEmpty().withMessage('Location is required')
-        .isLength({ max: 200 }).withMessage('Location must be less than 200 characters'),
+        .isLength({ max: 150 }).withMessage('Location must be less than 150 characters'),
     body('date')
         .notEmpty().withMessage('Date is required')
         .isISO8601().withMessage('Date must be a valid date format'),
     body('organizationId')
         .notEmpty().withMessage('Organization is required')
-        .isInt().withMessage('Organization must be a valid integer')
+        .isInt().withMessage('Organization must be a valid integer'),
+    body('status')
+        .trim()
+        .notEmpty().withMessage('Status is required')
+        .isIn(['Planned', 'In Progress', 'Completed']).withMessage('Status must be Planned, In Progress, or Completed')
 ];
 
 const showProjectsPage = async (req, res) => {
@@ -61,21 +65,24 @@ const showNewProjectForm = async (req, res) => {
 }
 
 const processNewProjectForm = async (req, res) => {
-    // Check for validation errors first
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        errors.array().forEach((error) => {
-            req.flash('error', error.msg);
-        });
-        return res.redirect('/new-project');
-    }
-
-    // Extract form data from req.body
-    const { title, description, location, date, organizationId, status } = req.body;
+    const {
+        title,
+        description,
+        location,
+        date,
+        organizationId,
+        status
+    } = req.body;
 
     try {
-        // Create the new project in the database
-        const newProjectId = await createProject(title, description, location, date, organizationId, status);
+        const newProjectId = await createProject(
+            title,
+            description,
+            location,
+            date,
+            organizationId,
+            status
+        );
 
         req.flash('success', 'New service project created successfully!');
         res.redirect(`/project/${newProjectId}`);
@@ -84,8 +91,8 @@ const processNewProjectForm = async (req, res) => {
         req.flash('error', 'There was an error creating the service project.');
         res.redirect('/new-project');
     }
-}
-
+};
+  
 const showEditProjectForm = async (req, res) => {
   console.log('Route reached');
 
