@@ -2,6 +2,16 @@ import express from 'express';
 import { showOrganizationsPage } from "./controllers/organizations.js";
 import { showHomePage } from './controllers/index.js';
 
+import { 
+    showUserRegistrationForm, 
+    processUserRegistrationForm,
+    showLoginForm, 
+    processLoginForm, 
+    processLogout,
+    showDashboard,
+    requireLogin
+} from './controllers/users.js';
+
 import {
     showOrganizationDetailsPage,
     showNewOrganizationForm,
@@ -86,5 +96,17 @@ router.get('/edit-project/:id', (req, res, next) => {
 }, showEditProjectForm);
 
 router.post('/edit-project/:id', projectValidation, processEditProjectForm);
+
+// User registration routes
+router.get('/register', showUserRegistrationForm);
+router.post('/register', processUserRegistrationForm);
+
+// User login routes
+router.get('/login', showLoginForm);
+router.post('/login', processLoginForm);
+router.get('/logout', processLogout);
+
+// Dashboard route
+router.get('/dashboard', requireLogin, showDashboard);
 
 export default router;
