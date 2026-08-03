@@ -224,7 +224,7 @@ FROM users u
 JOIN roles r ON u.role_id = r.role_id;
 
 -- Delete the test user
-DELETE FROM users WHERE email = 'test@example.com';
+DELETE FROM users WHERE email = 'admin@example.com';
 
 -- View all users and roles
 SELECT * FROM users;
@@ -233,7 +233,26 @@ SELECT * FROM roles;
 INSERT INTO users (name, email, password_hash, role_id) 
 VALUES ('admin', 'admin@example.com', 'cse340!', 2);
 -- Update the dedicated admin testing account to have admin role
-UPDATE users SET role_id = (SELECT role_id FROM roles WHERE role_name = 'admin') WHERE email = 'greg@gmail.com';
+UPDATE users SET role_id = (SELECT role_id FROM roles WHERE role_name = 'admin') WHERE email = 'admin@example.com';
 
 -- Verify the update by listing all users and their roles
 SELECT users.user_id, users.email, roles.role_name FROM users JOIN roles ON users.role_id = roles.role_id;
+
+CREATE TABLE ProjectVolunteer (
+    user_id INTEGER NOT NULL,
+    project_id INTEGER NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'Active'
+        CHECK (status IN ('Active', 'Pending', 'Withdrawn')),
+
+    volunteered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (user_id, project_id),
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (project_id)
+        REFERENCES ServiceProject(project_id)
+        ON DELETE CASCADE
+);

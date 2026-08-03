@@ -3,10 +3,30 @@
 <main>
     <h1><%= title %></h1>
 
-    <h2>Dashboard</h2>
-    <p>Name: <%= name %></p>
-    <p>Username: <%= email %></p>
+    <section class="user-info">
+        <p><strong>Name:</strong> <%= name %></p>
+        <p><strong>Email:</strong> <%= email %></p>
+    </section>
 
+    <section class="volunteered-projects">
+        <h2>My Volunteered Projects</h2>
+
+        <% if (volunteeredProjects && volunteeredProjects.length > 0) { %>
+            <ul class="project-list">
+                <% volunteeredProjects.forEach(project => { %>
+                    <li class="project-item">
+                        <a href="/project/<%= project.project_id %>"><%= project.title %></a>
+                        <span class="project-date"><%= new Date(project.date).toLocaleDateString() %></span>
+                        <form action="/project/<%= project.project_id %>/unvolunteer" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-secondary btn-sm">Remove</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>You have not signed up to volunteer for any projects yet. <a href="/projects">Browse projects</a> to find one!</p>
+        <% } %>
+    </section>
 </main>
 
-<%- include('partials/footer') %>
+<%- include('partials/footer') %>
