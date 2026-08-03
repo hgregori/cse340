@@ -10,7 +10,8 @@ import {
     processLogout,
     showDashboard,
     requireLogin,
-    requireRole
+    requireRole,
+    showUsers
 } from './controllers/users.js';
 
 import {
@@ -109,5 +110,8 @@ router.get('/logout', processLogout);
 
 // Dashboard route
 router.get('/dashboard', requireLogin, showDashboard);
+
+// Users route (only for Admin)
+router.get('/users', requireRole('admin'), showUsers);
 
 export default router;
